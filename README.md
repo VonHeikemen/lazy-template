@@ -46,7 +46,7 @@ They are external programs that provide IDE-like features to Neovim. If you want
 
 In this configuration there is a plugin that will help you install language servers: `mason-lspconfig`. If you execute the command `:LspInstall` while you are inside a file then `mason-lspconfig` will suggest a list of language servers that support that particular type of file.
 
-Keep in mind you need to meet the requirements of the language servers. For example, if you want to download the language server for the `go` programming language then you need to have `go` installed in your system. If you want to download a language written in javascript, you'll need NodeJS.
+Keep in mind you need to meet the requirements of the language servers. For example, if you want to download the language server for the `go` programming language then you need to have `go` installed in your system. If you want to download a language server written in javascript you'll need NodeJS.
 
 ## Learn more about the plugin manager
 
