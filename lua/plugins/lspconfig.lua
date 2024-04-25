@@ -70,7 +70,7 @@ function Plugin.config()
       end,
       ['lua_ls'] = function()
         -- if you install the language server for lua it will
-        -- load config from lua/plugins/lsp/lua_ls.lua
+        -- load the config from lua/plugins/lsp/lua_ls.lua
         require('plugins.lsp.lua_ls')
       end
     }
