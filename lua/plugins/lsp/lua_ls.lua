@@ -44,7 +44,8 @@ lspconfig.lua_ls.setup({
         library = {
           -- Make the server aware of Neovim runtime files
           vim.env.VIMRUNTIME,
-          vim.fn.stdpath('config')
+          vim.fn.stdpath('config'),
+          '${3rd}/luv/library'
         },
       },
     }
