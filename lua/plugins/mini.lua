@@ -10,6 +10,9 @@ Plugin.branch = 'stable'
 Plugin.dependencies = {
   {
     'JoosepAlviste/nvim-ts-context-commentstring',
+    opts = {
+      enable_autocmd = false,
+    },
     init = function()
       vim.g.skip_ts_context_commentstring_module = true
     end,
@@ -37,10 +40,6 @@ function Plugin.config()
         return cs or vim.bo.commentstring
       end,
     },
-  })
-
-  require('ts_context_commentstring').setup({
-    enable_autocmd = false,
   })
 
   -- See :help MiniNotify.config

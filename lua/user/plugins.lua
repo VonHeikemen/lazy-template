@@ -1,7 +1,8 @@
 local lazy = {}
 
 function lazy.install(path)
-  if not vim.loop.fs_stat(path) then
+  local uv = vim.uv or vim.loop
+  if not uv.fs_stat(path) then
     print('Installing lazy.nvim....')
     vim.fn.system({
       'git',
