@@ -18,7 +18,7 @@ function Plugin.init()
     severity_sort = false,
     float = {
       border = 'rounded',
-      source = 'always',
+      source = true,
     },
     signs = {
       text = {
