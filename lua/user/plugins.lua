@@ -1,8 +1,7 @@
 local lazy = {}
 
 function lazy.install(path)
-  local uv = vim.uv or vim.loop
-  if not uv.fs_stat(path) then
+  if not vim.uv.fs_stat(path) then
     print('Installing lazy.nvim....')
     vim.fn.system({
       'git',
@@ -25,7 +24,7 @@ function lazy.setup(plugins)
   require('lazy').setup(plugins, lazy.opts)
 end
 
-lazy.path = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+lazy.path = vim.fs.joinpath(vim.fn.stdpath('data'), 'lazy', 'lazy.nvim')
 lazy.opts = {
   ui = {
     border = 'rounded',

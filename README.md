@@ -8,7 +8,7 @@ Autocompletion and "code intellisense" is provided by the LSP client built into 
 
 ## Requirements
 
-* Neovim v0.9 or greater.
+* Neovim v0.10 or greater.
 * git.
 * A `C` compiler. Can be `gcc`, `tcc` or `zig`.
 * [make](https://www.gnu.org/software/make/), the build tool.

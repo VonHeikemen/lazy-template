@@ -12,27 +12,21 @@ Plugin.cmd = {'LspInfo', 'LspInstall', 'LspUnInstall'}
 Plugin.event = {'BufReadPre', 'BufNewFile'}
 
 function Plugin.init()
-  local sign = function(opts)
-    -- See :help sign_define()
-    vim.fn.sign_define(opts.name, {
-      texthl = opts.name,
-      text = opts.text,
-      numhl = ''
-    })
-  end
-
-  sign({name = 'DiagnosticSignError', text = '✘'})
-  sign({name = 'DiagnosticSignWarn', text = '▲'})
-  sign({name = 'DiagnosticSignHint', text = '⚑'})
-  sign({name = 'DiagnosticSignInfo', text = '»'})
-
   -- See :help vim.diagnostic.config()
   vim.diagnostic.config({
     virtual_text = true,
-    severity_sort = true,
+    severity_sort = false,
     float = {
       border = 'rounded',
       source = 'always',
+    },
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = '✘',
+        [vim.diagnostic.severity.WARN] = '▲',
+        [vim.diagnostic.severity.HINT] = '⚑',
+        [vim.diagnostic.severity.INFO] = '»',
+      },
     },
   })
 
