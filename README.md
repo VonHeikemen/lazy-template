@@ -123,7 +123,7 @@ Leader key: `Space`.
 | [neo-tree](https://github.com/nvim-neo-tree/neo-tree.nvim) | File explorer. |
 | [mini.nvim](https://github.com/echasnovski/mini.nvim) | Collection of independent lua modules that enhance Neovim's features. |
 | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) | Fuzzy finder. |
-| [telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim) | Allows fzf-like syntax in telescope. Note: only enabled in unix systems. |
+| [telescope-zf-native.nvim](https://github.com/natecraddock/telescope-zf-native.nvim) | A faster sorting algorithm for telescope. |
 | [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | Shows indicators in gutter based on file changes detected by git. |
 | [vim-fugitive](https://github.com/tpope/vim-fugitive) | Git integration into Neovim/Vim. |
 | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | Configures treesitter parsers. Provides modules to manipulate code. |
