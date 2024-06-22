@@ -5,11 +5,7 @@ Plugin.branch = '0.1.x'
 
 Plugin.dependencies = {
   {'nvim-lua/plenary.nvim'},
-  {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    build = 'make',
-    enabled = is_unix
-  },
+  {'natecraddock/telescope-zf-native.nvim'},
 }
 
 Plugin.cmd = {'Telescope'}
@@ -25,9 +21,7 @@ function Plugin.init()
 end
 
 function Plugin.config()
-  if is_unix then
-    pcall(require('telescope').load_extension, 'fzf')
-  end
+  pcall(require('telescope').load_extension, 'zf-native')
 end
 
 return Plugin

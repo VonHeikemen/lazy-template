@@ -11,7 +11,6 @@ Autocompletion and "code intellisense" is provided by the LSP client built into 
 * Neovim v0.10 or greater. For v0.9 use the [compat-09 branch](https://github.com/VonHeikemen/lazy-template/tree/compat-09). 
 * git.
 * A `C` compiler. Can be `gcc`, `tcc` or `zig`.
-* [make](https://www.gnu.org/software/make/), the build tool.
 * (optional) A patched font to display icons. I hear [nerdfonts](https://www.nerdfonts.com/) has a good collection.
 * (optional) [ripgrep](https://github.com/BurntSushi/ripgrep). Improves project wide search speed.
 * (optional) [fd](https://github.com/sharkdp/fd). Improves file search speed.
