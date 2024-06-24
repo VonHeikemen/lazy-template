@@ -3,9 +3,11 @@ local is_unix = vim.fn.has('unix') == 1 or vim.fn.has('mac') == 1
 
 Plugin.branch = '0.1.x'
 
+Plugin.build = false
+
 Plugin.dependencies = {
-  {'nvim-lua/plenary.nvim'},
-  {'natecraddock/telescope-zf-native.nvim'},
+  {'nvim-lua/plenary.nvim', build = false},
+  {'natecraddock/telescope-zf-native.nvim', build = false},
 }
 
 Plugin.cmd = {'Telescope'}

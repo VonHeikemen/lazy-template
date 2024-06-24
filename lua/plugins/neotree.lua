@@ -5,8 +5,8 @@ Plugin.branch = 'v3.x'
 Plugin.lazy = false
 
 Plugin.dependencies = {
-  'nvim-lua/plenary.nvim',
   'MunifTanjim/nui.nvim',
+  {'nvim-lua/plenary.nvim', build = false},
 }
 
 function Plugin.init()
