@@ -26,6 +26,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.api.nvim_create_autocmd('FileType', {
   pattern = {'help', 'man'},
   group = group,
-  command = 'nnoremap <buffer> q <cmd>quit<cr>'
+  command = 'nnoremap <buffer> q <cmd>close<cr>'
 })
 

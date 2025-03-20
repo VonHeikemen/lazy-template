@@ -14,20 +14,21 @@ lspconfig.lua_ls.setup({
     },
   },
   on_init = function(client)
-    local join = vim.fs.joinpath
+    local uv = vim.uv or vim.loop
+    local join = function(t) return table.concat(t, '/') end
     local path = client.workspace_folders[1].name
 
     -- Don't do anything if there is project local config
-    if vim.uv.fs_stat(join(path, '.luarc.json')) 
-      or vim.uv.fs_stat(join(path, '.luarc.jsonc'))
+    if uv.fs_stat(join({path, '.luarc.json'}))
+      or uv.fs_stat(join({path, '.luarc.jsonc'}))
     then
       return
     end
 
     -- Apply neovim specific settings
     local runtime_path = vim.split(package.path, ';')
-    table.insert(runtime_path, join('lua', '?.lua'))
-    table.insert(runtime_path, join('lua', '?', 'init.lua'))
+    table.insert(runtime_path, join({'lua', '?.lua'}))
+    table.insert(runtime_path, join({'lua', '?', 'init.lua'}))
 
     local nvim_settings = {
       runtime = {
@@ -44,8 +45,6 @@ lspconfig.lua_ls.setup({
         library = {
           -- Make the server aware of Neovim runtime files
           vim.env.VIMRUNTIME,
-          vim.fn.stdpath('config'),
-          '${3rd}/luv/library'
         },
       },
     }

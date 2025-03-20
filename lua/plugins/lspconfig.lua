@@ -12,33 +12,11 @@ Plugin.cmd = {'LspInfo', 'LspInstall', 'LspUnInstall'}
 Plugin.event = {'BufReadPre', 'BufNewFile'}
 
 function Plugin.init()
-  -- See :help vim.diagnostic.config()
-  vim.diagnostic.config({
-    virtual_text = true,
-    severity_sort = false,
-    float = {
-      border = 'rounded',
-      source = true,
-    },
-    signs = {
-      text = {
-        [vim.diagnostic.severity.ERROR] = '✘',
-        [vim.diagnostic.severity.WARN] = '▲',
-        [vim.diagnostic.severity.HINT] = '⚑',
-        [vim.diagnostic.severity.INFO] = '»',
-      },
-    },
-  })
-
-  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-    vim.lsp.handlers.hover,
-    {border = 'rounded'}
-  )
-
-  vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
-    vim.lsp.handlers.signature_help,
-    {border = 'rounded'}
-  )
+  if vim.fn.has('nvim-0.11') == 1 then
+    user.compat_11()
+  else
+    user.compat_09()
+  end
 end
 
 function Plugin.config()
@@ -73,27 +51,84 @@ function Plugin.config()
 end
 
 function user.on_attach(event)
-  local bufmap = function(mode, lhs, rhs, desc)
-    local opts = {buffer = event.buf, desc = desc}
-    vim.keymap.set(mode, lhs, rhs, opts)
-  end
+  local opts = {buffer = event.buf}
 
   -- You can search each function in the help page.
   -- For example :help vim.lsp.buf.hover()
 
-  bufmap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', 'Hover documentation')
-  bufmap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', 'Go to definition')
-  bufmap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', 'Go to declaration')
-  bufmap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', 'Go to implementation')
-  bufmap('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', 'Go to type definition')
-  bufmap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', 'Go to reference')
-  bufmap('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', 'Show function signature')
-  bufmap('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', 'Rename symbol')
-  bufmap({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', 'Format buffer')
-  bufmap('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', 'Execute code action')
-  bufmap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>', 'Show line diagnostic')
-  bufmap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>', 'Previous diagnostic')
-  bufmap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>', 'Next diagnostic')
+  -- These keymaps will become defaults after Neovim v0.11
+  -- I've added them here for backwards compatibility
+  vim.keymap.set('n', 'grr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
+  vim.keymap.set('n', 'gri', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
+  vim.keymap.set('n', 'grn', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+  vim.keymap.set('n', 'gra', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+  vim.keymap.set('n', 'gO', '<cmd>lua vim.lsp.buf.document_symbol()<cr>', opts)
+  vim.keymap.set({'i', 's'}, '<C-s>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
+
+  -- These are custom keymaps
+  vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+  vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
+  vim.keymap.set('n', 'grt', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
+  vim.keymap.set('n', 'grd', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
+  vim.keymap.set({'n', 'x'}, 'gq', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
+end
+
+function user.compat_09()
+  vim.diagnostic.config({
+    virtual_text = true,
+    float = {
+      border = 'rounded',
+    },
+  })
+
+  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+    vim.lsp.handlers.hover,
+    {border = 'rounded'}
+  )
+
+  vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
+    vim.lsp.handlers.signature_help,
+    {border = 'rounded'}
+  )
+
+  local function sign_define(args)
+    vim.fn.sign_define(args.name, {
+      texthl = args.name,
+      text = args.text,
+      numhl = ''
+    })
+  end
+
+  sign_define({name = 'DiagnosticSignError', text = '✘'})
+  sign_define({name = 'DiagnosticSignWarn', text = '▲'})
+  sign_define({name = 'DiagnosticSignHint', text = '⚑'})
+  sign_define({name = 'DiagnosticSignInfo', text = '»'})
+
+  if vim.fn.has('nvim-0.10') == 0 then
+    -- This were added to Neovim on version v0.10
+    vim.keymap.set('n', '<C-w>d', '<cmd>lua vim.diagnostic.open_float()<cr>')
+    vim.keymap.set('n', '<C-w><C-d>', '<cmd>lua vim.diagnostic.open_float()<cr>')
+    vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
+    vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
+  end
+end
+
+function user.compat_11()
+  -- 'winborder' is a very recent addition to Neovim
+  -- this will fail if your nightly version is not recent enough
+  pcall(function() vim.o.winborder = 'rounded' end)
+
+  vim.diagnostic.config({
+    virtual_text = true,
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = '✘',
+        [vim.diagnostic.severity.WARN] = '▲',
+        [vim.diagnostic.severity.HINT] = '⚑',
+        [vim.diagnostic.severity.INFO] = '»',
+      },
+    },
+  })
 end
 
 return Plugin

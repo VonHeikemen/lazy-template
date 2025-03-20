@@ -4,36 +4,33 @@ Plugin.dependencies = {
   -- Completion sources
   {'hrsh7th/cmp-buffer'},
   {'hrsh7th/cmp-path'},
-  {'saadparwaiz1/cmp_luasnip'},
   {'hrsh7th/cmp-nvim-lsp'},
+  {'abeldekat/cmp-mini-snippets'},
 
-  -- Snippets
-  {'L3MON4D3/LuaSnip'},
-  {'rafamadriz/friendly-snippets'},
+  -- We'll be using mini.snippets
+  {'echasnovski/mini.nvim'},
 }
 
 Plugin.event = 'InsertEnter'
 
 function Plugin.config()
   local cmp = require('cmp')
-  local luasnip = require('luasnip')
-
-  require('luasnip.loaders.from_vscode').lazy_load()
-
   local select_opts = {behavior = cmp.SelectBehavior.Select}
 
   -- See :help cmp-config
   cmp.setup({
     snippet = {
       expand = function(args)
-        luasnip.lsp_expand(args.body)
+        require('mini.snippets').default_insert({body = args.body})
+        cmp.resubscribe({'TextChangedI', 'TextChangedP'})
+        require('cmp.config').set_onetime({sources = {}})
       end
     },
     sources = {
       {name = 'path'},
       {name = 'nvim_lsp'},
       {name = 'buffer', keyword_length = 3},
-      {name = 'luasnip', keyword_length = 2},
+      {name = 'mini_snippets', keyword_length = 2},
     },
     window = {
       completion = cmp.config.window.bordered(),
@@ -54,21 +51,7 @@ function Plugin.config()
       ['<C-y>'] = cmp.mapping.confirm({select = true}),
       ['<CR>'] = cmp.mapping.confirm({select = false}),
 
-      ['<C-f>'] = cmp.mapping(function(fallback)
-        if luasnip.jumpable(1) then
-          luasnip.jump(1)
-        else
-          fallback()
-        end
-      end, {'i', 's'}),
-
-      ['<C-b>'] = cmp.mapping(function(fallback)
-        if luasnip.jumpable(-1) then
-          luasnip.jump(-1)
-        else
-          fallback()
-        end
-      end, {'i', 's'}),
+      ['<S-Tab>'] = cmp.mapping.select_prev_item(select_opts),
 
       ['<Tab>'] = cmp.mapping(function(fallback)
         local col = vim.fn.col('.') - 1
@@ -82,7 +65,6 @@ function Plugin.config()
         end
       end, {'i', 's'}),
 
-      ['<S-Tab>'] = cmp.mapping.select_prev_item(select_opts),
     },
   })
 end

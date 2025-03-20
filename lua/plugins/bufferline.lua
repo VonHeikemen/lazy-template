@@ -1,12 +1,10 @@
 local Plugin = {'akinsho/bufferline.nvim'}
 
-Plugin.event = 'VeryLazy'
-
 Plugin.opts = {
   options = {
     mode = 'buffers',
     offsets = {
-      {filetype = 'neo-tree'},
+      {filetype = 'snacks_layout_box'},
     },
   },
   -- :help bufferline-highlights
@@ -21,4 +19,9 @@ Plugin.opts = {
   }
 }
 
+function Plugin.init()
+  vim.keymap.set('n', 'sb', '<cmd>BufferLinePick<cr>', {desc = 'Pick a visible tab'})
+end
+
 return Plugin
+

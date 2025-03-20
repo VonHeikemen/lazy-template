@@ -6,6 +6,8 @@ Plugin.dependencies = {
   {'nvim-treesitter/nvim-treesitter-textobjects'}
 }
 
+Plugin.build = ':TSUpdate'
+
 -- See :help nvim-treesitter-modules
 Plugin.opts = {
   auto_install = true,
@@ -29,8 +31,10 @@ Plugin.opts = {
   },
 
   ensure_installed = {
+    'lua',
     'vim',
     'vimdoc',
+    'json',
   },
 }
 

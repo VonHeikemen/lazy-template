@@ -16,6 +16,7 @@ vim.keymap.set({'n', 'x'}, 'X', '"_d', {desc = 'Cut text'})
 
 -- Commands
 vim.keymap.set('n', '<leader>w', '<cmd>write<cr>', {desc = 'Save buffer'})
+vim.keymap.set('n', '<leader>qq', '<cmd>quitall<cr>', {desc = 'Exit Neovim'})
 vim.keymap.set('n', '<leader>bq', '<cmd>bdelete<cr>', {desc = 'Close buffer'})
 vim.keymap.set('n', '<leader>bl', '<cmd>buffer #<cr>', {desc = 'Go to last active buffer'})
 
