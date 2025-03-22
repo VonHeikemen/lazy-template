@@ -112,7 +112,8 @@ end
 
 function user.jump_char()
   local opts = {hooks = {}}
-  local noop = function() end
+  local noop = function() return {} end
+  local esc = vim.api.nvim_replace_termcodes('<Esc>', true, true, true)
 
   opts.hooks.before_start = function()
     local prompt = {{'Chars: '}}
@@ -123,7 +124,7 @@ function user.jump_char()
 
     for _=1, total, 1 do
       local ok, ch = pcall(vim.fn.getcharstr)
-      if ok == false or ch == nil then
+      if ok == false or ch == nil or ch == esc then
         opts.spotter = noop
         return
       end
