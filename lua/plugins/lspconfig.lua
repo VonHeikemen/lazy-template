@@ -70,7 +70,7 @@ function user.on_attach(event)
   vim.keymap.set('n', 'grd', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
   vim.keymap.set({'n', 'x'}, 'gq', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
 
-  -- note: border style is only effect in neovim v0.11
+  -- note: border style is only effective in neovim v0.11
   -- below that version the style is configured by the handlers, see user.compat_09()
   vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover({border = "rounded"})<cr>', opts)
   vim.keymap.set({'i', 's'}, '<C-s>', '<cmd>lua vim.lsp.buf.signature_help({border = "rounded"})<cr>', opts)
