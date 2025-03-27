@@ -11,9 +11,6 @@ Plugin.opts = {
   scope = {
     enabled = false,
   },
-  animate = {
-    enabled = false,
-  },
   toggle = {
     notify = false,
   },
@@ -50,6 +47,9 @@ Plugin.opts = {
 }
 
 function Plugin.config(_, opts)
+  -- Disable indent guide animation
+  vim.g.snacks_animate = false
+
   local Snacks = require('snacks')
   Snacks.setup(opts)
 
@@ -81,6 +81,9 @@ function Plugin.config(_, opts)
   -- Close buffer while preserving window layout
   -- docs: https://github.com/folke/snacks.nvim/blob/main/docs/bufdelete.md
   vim.keymap.set('n', '<leader>bc', '<cmd>lua Snacks.bufdelete()<cr>', {desc = 'Close buffer'})
+
+  -- Toggle indent guide lines
+  vim.keymap.set('n', '<leader>ui', '<cmd>lua Snacks.toggle.indent():toggle()', {desc = 'Toggle indent guides'})
 end
 
 return Plugin

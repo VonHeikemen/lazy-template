@@ -79,6 +79,7 @@ Leader key: `Space`.
 | Normal   | `<leader>?`       | Search keymaps.                                                 |
 | Normal   | `<leader>/`       | Search snack pickers.                                           |
 | Normal   | `<leader>e`       | Open file explorer.                                             |
+| Normal   | `<leader>ui`      | Toggle indent guide lines.                                      |
 | Normal   | `<Ctrl-g>`        | Toggle a terminal window.                                       |
 | Normal   | `gw`              | Begin a 2 character jump.                                       |
 | Normal   | `gcc`             | Toggle comment in current line.                                 |
