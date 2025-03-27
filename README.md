@@ -8,7 +8,9 @@ Autocompletion and "code intellisense" is provided by the LSP client built into 
 
 ## Requirements
 
-* Neovim v0.10 is recommended. v0.9.5 is the minimum required.
+* Neovim v0.10 or greater is recommended.
+  * v0.9.5 is the minimum required.
+  * v0.11 is the latest stable version.
 * git.
 * A `C` compiler. Can be `gcc`, `tcc` or `zig`.
 * (optional) A patched font to display icons. I hear [nerdfonts](https://www.nerdfonts.com/) has a good collection.
