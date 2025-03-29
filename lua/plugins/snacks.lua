@@ -83,7 +83,7 @@ function Plugin.config(_, opts)
   vim.keymap.set('n', '<leader>bc', '<cmd>lua Snacks.bufdelete()<cr>', {desc = 'Close buffer'})
 
   -- Toggle indent guide lines
-  vim.keymap.set('n', '<leader>ui', '<cmd>lua Snacks.toggle.indent():toggle()', {desc = 'Toggle indent guides'})
+  vim.keymap.set('n', '<leader>ti', '<cmd>lua Snacks.toggle.indent():toggle()', {desc = 'Toggle indent guides'})
 end
 
 return Plugin
