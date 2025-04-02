@@ -25,16 +25,10 @@ lspconfig.lua_ls.setup({
       return
     end
 
-    -- Apply neovim specific settings
-    local runtime_path = vim.split(package.path, ';')
-    table.insert(runtime_path, join({'lua', '?.lua'}))
-    table.insert(runtime_path, join({'lua', '?', 'init.lua'}))
-
     local nvim_settings = {
       runtime = {
         -- Tell the language server which version of Lua you're using
         version = 'LuaJIT',
-        path = runtime_path
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
