@@ -83,6 +83,7 @@ Leader key: `Space`.
 | Normal   | `<leader>e`       | Open file explorer.                                             |
 | Normal   | `<leader>ti`      | Toggle indent guide lines.                                      |
 | Normal   | `<Ctrl-g>`        | Toggle a terminal window.                                       |
+| Terminal | `<Esc><Esc>`      | Pressing `Escape` twice quickly goes back to normal mode.       |
 | Normal   | `gw`              | Begin a 2 character jump.                                       |
 | Normal   | `gcc`             | Toggle comment in current line.                                 |
 | Operator | `gc`              | Toggle comment in text.                                         |
