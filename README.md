@@ -99,7 +99,7 @@ Leader key: `Space`.
 | Normal   | `gd`              | Jump to the definition.                                         |
 | Normal   | `gq`              | Format code in current buffer.                                  |
 | Normal   | `gO`              | Lists symbols in the current buffer.                            |
-| Normal   | `<C-s>`           | Displays a function's signature information.                    |
+| Normal   | `<Ctrl-s>`        | Displays a function's signature information.                    |
 | Normal   | `gri`             | Lists all the implementations for the symbol under the cursor.  |
 | Normal   | `grr`             | Lists all the references.                                       |
 | Normal   | `grn`             | Renames all references to the symbol under the cursor.          |
@@ -121,7 +121,7 @@ Leader key: `Space`.
 | Insert | `<Ctrl-u>`    | Scroll up in documentation window.                                       |
 | Insert | `<Ctrl-d>`    | Scroll down in documentation window.                                     |
 | Insert | `<Ctrl-e>`    | Cancel completion.                                                       |
-| Insert | `<C-y>`       | Confirm completion.                                                      |
+| Insert | `<Ctrl-y>`    | Confirm completion.                                                      |
 | Insert | `<Enter>`     | Confirm completion.                                                      |
 | Insert | `<Tab>`       | If completion menu is open, go to next item. Else, open completion menu. |
 | Insert | `<Shift-Tab>` | If completion menu is open, go to previous item.                         |
