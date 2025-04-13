@@ -17,15 +17,11 @@ if vim.fn.has('nvim-0.10') == 0 then
   Plugin.pin = true
 end
 
-function Plugin.init()
-  if vim.fn.has('nvim-0.11') == 1 then
-    user.compat_11()
-  else
+function Plugin.config()
+  if vim.fn.has('nvim-0.11') == 0 then
     user.compat_09()
   end
-end
 
-function Plugin.config()
   local lspconfig = require('lspconfig')
   local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 
@@ -83,13 +79,6 @@ function user.on_attach(event)
 end
 
 function user.compat_09()
-  vim.diagnostic.config({
-    virtual_text = true,
-    float = {
-      border = 'rounded',
-    },
-  })
-
   vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
     vim.lsp.handlers.hover,
     {border = 'rounded'}
@@ -99,44 +88,6 @@ function user.compat_09()
     vim.lsp.handlers.signature_help,
     {border = 'rounded'}
   )
-
-  local function sign_define(args)
-    vim.fn.sign_define(args.name, {
-      texthl = args.name,
-      text = args.text,
-      numhl = ''
-    })
-  end
-
-  sign_define({name = 'DiagnosticSignError', text = '✘'})
-  sign_define({name = 'DiagnosticSignWarn', text = '▲'})
-  sign_define({name = 'DiagnosticSignHint', text = '⚑'})
-  sign_define({name = 'DiagnosticSignInfo', text = '»'})
-
-  if vim.fn.has('nvim-0.10') == 0 then
-    -- This were added to Neovim on version v0.10
-    vim.keymap.set('n', '<C-w>d', '<cmd>lua vim.diagnostic.open_float()<cr>')
-    vim.keymap.set('n', '<C-w><C-d>', '<cmd>lua vim.diagnostic.open_float()<cr>')
-    vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
-    vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
-  end
-end
-
-function user.compat_11()
-  vim.diagnostic.config({
-    virtual_text = true,
-    float = {
-      border = 'rounded',
-    },
-    signs = {
-      text = {
-        [vim.diagnostic.severity.ERROR] = '✘',
-        [vim.diagnostic.severity.WARN] = '▲',
-        [vim.diagnostic.severity.HINT] = '⚑',
-        [vim.diagnostic.severity.INFO] = '»',
-      },
-    },
-  })
 end
 
 return Plugin
