@@ -11,6 +11,12 @@ Plugin.cmd = {'LspInfo', 'LspInstall', 'LspUnInstall'}
 
 Plugin.event = {'BufReadPre', 'BufNewFile'}
 
+if vim.fn.has('nvim-0.10') == 0 then
+  -- Last version that supports Neovim v0.9
+  Plugin.tag = 'v1.8.0'
+  Plugin.pin = true
+end
+
 function Plugin.init()
   if vim.fn.has('nvim-0.11') == 1 then
     user.compat_11()
