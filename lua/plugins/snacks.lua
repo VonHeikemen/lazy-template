@@ -70,7 +70,7 @@ function Plugin.config(_, opts)
   vim.keymap.set('n', '<leader>fg', '<cmd>lua Snacks.picker("grep")<cr>', {desc = 'Search in project'})
   vim.keymap.set('n', '<leader>fd', '<cmd>lua Snacks.picker("diagnostics")<cr>', {desc = 'Search diagnostics'})
   vim.keymap.set('n', '<leader>fs', '<cmd>lua Snacks.picker("lines")<cr>', {desc = 'Buffer local search'})
-  vim.keymap.set('n', '<leader>u', '<cmd>lua Snacks.picker("undo")<cr>', {desc = 'Search undo history'})
+  vim.keymap.set('n', '<leader>u', '<cmd>lua Snacks.picker("undo")<cr>', {desc = 'Undo history'})
   vim.keymap.set('n', '<leader>/', '<cmd>lua Snacks.picker("pickers")<cr>', {desc = 'Search picker'})
   vim.keymap.set('n', '<leader>?', '<cmd>lua Snacks.picker("keymaps")<cr>', {desc = 'Search keymaps'})
 

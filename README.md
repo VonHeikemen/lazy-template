@@ -107,8 +107,16 @@ Leader key: `Space`.
 | Normal   | `grd`             | Jump to declaration.                                            |
 | Normal   | `grt`             | Jumps to the definition of the type symbol                      |
 | Normal   | `<Ctrl-w>d`       | Show diagnostics in a floating window.                          |
-| Normal   | `[d`              | Move to the previous diagnostic.                                |
-| Normal   | `]d`              | Move to the next diagnostic.                                    |
+| Normal   | `[b`              | Go to the previous buffer.                                      |
+| Normal   | `]b`              | Go to the next buffer.                                          |
+| Normal   | `[B`              | Go to the first buffer.                                         |
+| Normal   | `]B`              | Go to the last buffer.                                          |
+| Normal   | `[d`              | Move cursor to the previous diagnostic.                         |
+| Normal   | `]d`              | Move cursor to the next diagnostic.                             |
+| Normal   | `[q`              | Move cursor to the previous location in the quickfix list.      |
+| Normal   | `]q`              | Move cursor to the next location in the quickfix list.          |
+| Normal   | `[Q`              | Move cursor to the first location in the quickfix list.         |
+| Normal   | `]Q`              | Move cursor to the last location in the quickfix list.          |
 
 ### Autocomplete keybindings
 
