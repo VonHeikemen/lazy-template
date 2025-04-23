@@ -81,7 +81,10 @@ function Plugin.config()
     },
     allowed_windows = {
       not_current = false,
-    }
+    },
+    mappings = {
+      start_jumping = '',
+    },
   })
 
   -- Begin a 2 character jump using mini.jump2d
