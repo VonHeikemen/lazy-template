@@ -20,12 +20,26 @@ end
 function Plugin.config()
   if vim.fn.has('nvim-0.11') == 0 then
     user.compat_09()
+    user.legacy_api = true
   end
 
-  local lspconfig = require('lspconfig')
-  local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+  user.lsp_capabilities()
 
+  local lspconfig = require('lspconfig')
   local group = vim.api.nvim_create_augroup('lsp_cmds', {clear = true})
+
+  local setup = function(server, opts)
+    if user.legacy_api or user.legacy_config(server) then
+      lspconfig[server].setup(opts or {})
+      return
+    end
+
+    if opts then
+      vim.lsp.config(server, opts)
+    end
+
+    vim.lsp.enable(server)
+  end
 
   vim.api.nvim_create_autocmd('LspAttach', {
     group = group,
@@ -38,15 +52,13 @@ function Plugin.config()
     handlers = {
       -- See :help mason-lspconfig-dynamic-server-setup
       function(server)
-        -- See :help lspconfig-setup
-        lspconfig[server].setup({
-          capabilities = lsp_capabilities,
-        })
+        setup(server, nil)
       end,
       ['lua_ls'] = function()
         -- if you install the language server for lua it will
         -- load the config from lua/plugins/lsp/lua_ls.lua
-        require('plugins.lsp.lua_ls')
+        local lua_opts = require('plugins.lsp.lua_ls')
+        setup('lua_ls', lua_opts)
       end
     }
   })
@@ -88,6 +100,26 @@ function user.compat_09()
     vim.lsp.handlers.signature_help,
     {border = 'rounded'}
   )
+end
+
+function user.lsp_capabilities()
+  local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+  local lc_defaults = require('lspconfig').util.default_config
+
+  lc_defaults.capabilities = vim.tbl_deep_extend(
+    'force',
+    lc_defaults.capabilities,
+    cmp_capabilities
+  )
+
+  if vim.lsp.config then
+    vim.lsp.config('*', {capabilities = cmp_capabilities})
+  end
+end
+
+function user.legacy_config(server)
+  local configs = require('plugins.lsp.legacy_configs')
+  return vim.tbl_contains(configs, server)
 end
 
 return Plugin
