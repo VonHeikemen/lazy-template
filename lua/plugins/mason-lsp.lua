@@ -1,4 +1,4 @@
-local Plugin = {'williamboman/mason-lspconfig.nvim'}
+local Plugin = {'mason-org/mason-lspconfig.nvim'}
 
 Plugin.lazy = true
 
@@ -9,7 +9,11 @@ if vim.fn.has('nvim-0.11') == 0 then
 end
 
 -- See :help mason-lspconfig-settings
-Plugin.opts = {}
+Plugin.opts = {
+  -- language servers will be enabled in
+  -- lua/plugins/lspconfig.lua
+  automatic_enable = false,
+}
 
 return Plugin
 
