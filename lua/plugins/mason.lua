@@ -2,6 +2,12 @@ local Plugin = {'williamboman/mason.nvim'}
 
 Plugin.lazy = false
 
+if vim.fn.has('nvim-0.10') == 0 then
+  -- Last version that supports Neovim v0.9
+  Plugin.tag = 'v1.11.0'
+  Plugin.pin = true
+end
+
 -- See :help mason-settings
 Plugin.opts = {
   ui = {border = 'rounded'}

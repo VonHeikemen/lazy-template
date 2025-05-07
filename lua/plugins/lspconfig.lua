@@ -47,21 +47,18 @@ function Plugin.config()
     callback = user.on_attach
   })
 
-  -- See :help mason-lspconfig-settings
-  require('mason-lspconfig').setup({
-    handlers = {
-      -- See :help mason-lspconfig-dynamic-server-setup
-      function(server)
-        setup(server, nil)
-      end,
-      ['lua_ls'] = function()
-        -- if you install the language server for lua it will
-        -- load the config from lua/plugins/lsp/lua_ls.lua
-        local lua_opts = require('plugins.lsp.lua_ls')
-        setup('lua_ls', lua_opts)
-      end
-    }
-  })
+  local installed_servers = require('mason-lspconfig').get_installed_servers
+  for _, server in ipairs(installed_servers()) do
+    local opts = nil
+
+    if server == 'lua_ls' then
+      -- if you install the language server for lua it will
+      -- load the config from lua/plugins/lsp/lua_ls.lua
+      opts = require('plugins.lsp.lua_ls')
+    end
+
+    setup(server, opts)
+  end
 end
 
 function user.on_attach(event)
