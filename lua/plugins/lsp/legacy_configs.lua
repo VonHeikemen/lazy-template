@@ -16,6 +16,5 @@ return {
   'vdmj',
   'bitbake_ls',
   'delphi_ls',
-  'matlab_ls',
 }
 
