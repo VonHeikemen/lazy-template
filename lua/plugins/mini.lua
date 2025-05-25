@@ -141,6 +141,7 @@ end
 function user.jump_char()
   local opts = {hooks = {}}
   local noop = function() return {} end
+  local spotter = require('mini.jump2d').gen_spotter.pattern
   local esc = vim.api.nvim_replace_termcodes('<Esc>', true, true, true)
 
   opts.hooks.before_start = function()
@@ -167,7 +168,7 @@ function user.jump_char()
       end
     end
 
-    opts.spotter = require('mini.jump2d').gen_pattern_spotter(input)
+    opts.spotter = spotter(input)
   end
 
   return function()
