@@ -8,11 +8,11 @@ Autocompletion and "code intellisense" is provided by the LSP client built into 
 
 ## Requirements
 
-* Neovim v0.10 or greater is recommended.
+* Neovim v0.11 or greater is recommended.
   * v0.9.5 is the minimum required.
-  * v0.11 is the latest stable version.
 * git.
 * A `C` compiler. Can be `gcc`, `tcc` or `zig`.
+* [tree-sitter CLI](https://github.com/tree-sitter/tree-sitter) 0.25 or greater
 * (optional) A patched font to display icons. I hear [nerdfonts](https://www.nerdfonts.com/) has a good collection.
 * (optional) [ripgrep](https://github.com/BurntSushi/ripgrep). Improves project wide search speed.
 * (optional) [fd](https://github.com/sharkdp/fd). Improves file search speed.

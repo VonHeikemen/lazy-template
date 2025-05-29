@@ -1,9 +1,11 @@
 local Plugin = {'nvim-treesitter/nvim-treesitter'}
 
 Plugin.main = 'nvim-treesitter.configs'
+Plugin.branch = 'master'
+Plugin.lazy = false
 
 Plugin.dependencies = {
-  {'nvim-treesitter/nvim-treesitter-textobjects'}
+  {'nvim-treesitter/nvim-treesitter-textobjects', branch = 'master'}
 }
 
 Plugin.build = ':TSUpdate'
@@ -34,7 +36,6 @@ Plugin.opts = {
     'lua',
     'vim',
     'vimdoc',
-    'json',
   },
 }
 

@@ -44,6 +44,19 @@ lazy.opts = {
   },
 }
 
--- import plugins configs from lua/plugins/ folder
-lazy.setup({{import = 'plugins'}})
+-- include all configurations from lua/plugins/* folder
+-- note: files in nested folders are not included by default (which is good)
+local plugins = {{import = 'plugins'}}
+
+if vim.fn.has('nvim-0.11') == 1 then
+  -- include plugins in lua/plugins/nvim-011/*
+  -- these are not compatible with older versions of neovim
+  table.insert(plugins, {import = 'plugins.nvim-011'})
+else
+  -- include plugins in lua/plugins/nvim-09/*
+  -- these are pinned to a version that still work on nvim v0.9 and v0.10
+  table.insert(plugins, {import = 'plugins.nvim-09'})
+end
+
+lazy.setup({plugins})
 
