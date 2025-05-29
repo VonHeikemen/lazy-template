@@ -12,13 +12,18 @@ return {
   on_init = function(client)
     local uv = vim.uv or vim.loop
     local join = function(t) return table.concat(t, '/') end
-    local path = client.workspace_folders[1].name
 
-    -- Don't do anything if there is project local config
-    if uv.fs_stat(join({path, '.luarc.json'}))
-      or uv.fs_stat(join({path, '.luarc.jsonc'}))
-    then
-      return
+    -- Don't do anything if there is a project local config
+    if client.workspace_folders then
+      local path = client.workspace_folders[1].name
+      local luarc = (
+        uv.fs_stat(join({path, '.luarc.json'}))
+        or uv.fs_stat(join({path, '.luarc.jsonc'}))
+      )
+
+      if luarc then
+        return
+      end
     end
 
     local nvim_settings = {
