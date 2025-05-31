@@ -1,7 +1,8 @@
 local Plugin = {'nvim-treesitter/nvim-treesitter'}
 
 Plugin.main = 'nvim-treesitter.configs'
-Plugin.branch = 'master'
+Plugin.tag = 'v0.10.0'
+Plugin.pin = true
 Plugin.lazy = false
 
 Plugin.dependencies = {
