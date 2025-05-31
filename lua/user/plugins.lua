@@ -58,5 +58,5 @@ else
   table.insert(plugins, {import = 'plugins.nvim-09'})
 end
 
-lazy.setup({plugins})
+lazy.setup(plugins)
 

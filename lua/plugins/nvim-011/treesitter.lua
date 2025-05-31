@@ -10,7 +10,7 @@ Plugin.lazy = false
 
 function Plugin.config()
   -- NOTE: parser names and neovim filetypes sometimes are different
-  -- the list of supported parsers is the documentation: 
+  -- the list of supported parsers is the documentation:
   -- https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#supported-languages
 
   local parsers = {'lua', 'vim', 'vimdoc'}

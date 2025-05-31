@@ -205,7 +205,7 @@ function user.clues()
     {mode = 'n', keys = 'z'},
     {mode = 'x', keys = 'z'},
   }
-    
+
   local clues = {
     gen.builtin_completion(),
     gen.g(),
