@@ -9,17 +9,18 @@ Plugin.build = ':TSUpdate'
 Plugin.lazy = false
 
 function Plugin.config()
-  -- NOTE: parser names and neovim filetypes sometimes are different
-  -- the list of supported parsers is the documentation:
-  -- https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#supported-languages
-
+  -- NOTE: the list of supported parsers is the documentation:
+  -- https://github.com/nvim-treesitter/nvim-treesitter/blob/main/SUPPORTED_LANGUAGES.md
   local parsers = {'lua', 'vim', 'vimdoc'}
-  local filetypes = {'lua', 'vim', 'help'}
 
-  user.ensure_installed(parsers)
+  local filetypes = user.map_filetypes(parsers)
+  local group = vim.api.nvim_create_augroup('treesitter_cmds', {clear = true})
+
+  require('nvim-treesitter').install(parsers)
 
   vim.api.nvim_create_autocmd('FileType', {
     pattern = filetypes,
+    group = group,
     desc = 'enable treesitter syntax highlight',
     callback = function()
       vim.treesitter.start()
@@ -27,22 +28,15 @@ function Plugin.config()
   })
 end
 
-function user.ensure_installed(parsers)
-  local ts = require('nvim-treesitter')
-  local installed_parsers = ts.get_installed()
-  local missing = {}
+function user.map_filetypes(parsers)
+  local result = {}
+  local get_filetypes = vim.treesitter.language.get_filetypes
 
   for _, parser in ipairs(parsers) do
-    local installed = vim.tbl_contains(installed_parsers, parser)
-
-    if not installed then
-      table.insert(missing, parser)
-    end
+    vim.list_extend(result, get_filetypes(parser))
   end
 
-  if not vim.tbl_isempty(missing) then
-    ts.install(missing)
-  end
+  return result
 end
 
 return Plugin
