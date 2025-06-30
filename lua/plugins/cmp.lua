@@ -3,9 +3,9 @@ local Plugin = {'hrsh7th/nvim-cmp'}
 Plugin.dependencies = {
   -- Completion sources
   {'hrsh7th/cmp-buffer'},
-  {'hrsh7th/cmp-path'},
   {'hrsh7th/cmp-nvim-lsp'},
   {'abeldekat/cmp-mini-snippets'},
+  {'hrsh7th/cmp-path', commit = 'c6635aae33a50d6010bf1aa756ac2398a2d54c32'},
 
   -- We'll be using mini.snippets
   {'echasnovski/mini.nvim'},
