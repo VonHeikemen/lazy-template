@@ -7,7 +7,6 @@ return {
   'cadence',
   'codeqlls',
   'drools_lsp',
-  'glint',
   'haxe_language_server',
   'leanls',
   'openedge_ls',
