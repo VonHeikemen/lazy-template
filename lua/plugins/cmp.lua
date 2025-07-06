@@ -5,7 +5,7 @@ Plugin.dependencies = {
   {'hrsh7th/cmp-buffer'},
   {'hrsh7th/cmp-nvim-lsp'},
   {'abeldekat/cmp-mini-snippets'},
-  {'hrsh7th/cmp-path', pin = true, commit = 'c6635aae33a50d6010bf1aa756ac2398a2d54c32'},
+  {'hrsh7th/cmp-path'},
 
   -- We'll be using mini.snippets
   {'echasnovski/mini.nvim'},
