@@ -23,6 +23,8 @@ If you need a `C` compiler then `zig` is the easiest to install. It's available 
 
 ## Installation
 
+* I recommend installing Neovim's [latest stable version](https://vonheikemen.github.io/learn-nvim/101/installation.html). Or at least Neovim v0.9.
+
 * Clone this repository in Neovim's configuration folder.
 
   If you don't know the location of that folder, use this command in your terminal.
@@ -38,6 +40,21 @@ If you need a `C` compiler then `zig` is the easiest to install. It's available 
   ```
 
   The plugin manager will be installed automatically. And then all the plugins will be installed.
+
+## Learn how to use Neovim as a text editor
+
+Neovim comes with an interactive tutorial that teaches the basics of the editor. The estimated time of this tutorial is around 45 minutes. It will show you how to move around text, how to execute commands and of course how to quit Neovim. You can access the tutorial by executing this command in your terminal.
+
+```sh
+nvim +Tutor
+```
+
+I've also created a documentation site aimed at teaching the basic features of Neovim. Note that it is mostly about how to use Neovim as a text editor without plugins, but there is still some valuable information there:
+
+* [The nvim command](https://vonheikemen.github.io/learn-nvim/101/the-nvim-command.html)
+* [Basic editing](https://vonheikemen.github.io/learn-nvim/101/basic-editing.html)
+* [Edit multiple files](https://vonheikemen.github.io/learn-nvim/101/edit-multiple-files.html)
+* [The help page](https://vonheikemen.github.io/learn-nvim/101/the-help-page.html)
 
 ## About language servers
 
