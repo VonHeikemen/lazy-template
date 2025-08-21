@@ -11,6 +11,16 @@ Plugin.dependencies = {
   {'echasnovski/mini.nvim'},
 }
 
+if vim.fn.has('nvim-0.11') == 0 then
+  vim.list_extend(Plugin.dependencies, {
+    {
+      'hrsh7th/cmp-nvim-lsp',
+      pin = true,
+      commit = 'a8912b88ce488f411177fc8aed358b04dc246d7b'
+    },
+  })
+end
+
 Plugin.event = 'InsertEnter'
 
 function Plugin.config()
