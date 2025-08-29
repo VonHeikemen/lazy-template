@@ -1,12 +1,12 @@
--- Note: mini.nvim is a collection of lua modules.
--- each module is basically a standalone plugin.
--- you can read their documentation on github:
--- https://github.com/echasnovski/mini.nvim
+- Note: mini.nvim is a collection of lua modules.
+- each module is basically a standalone plugin.
+- you can read their documentation on github:
+- https://github.com/nvim-mini/mini.nvim
 
-local Plugin = {'echasnovski/mini.nvim'}
-local user = {}
+ocal Plugin = {'nvim-mini/mini.nvim'}
+ocal user = {}
 
-Plugin.lazy = false
+lugin.lazy = false
 
 Plugin.dependencies = {
   {'rafamadriz/friendly-snippets'},
