@@ -5,13 +5,13 @@ Plugin.dependencies = {
   {'hrsh7th/cmp-buffer'},
   {'hrsh7th/cmp-nvim-lsp'},
   {'abeldekat/cmp-mini-snippets'},
- {'hrsh7th/cmp-path'},
+  {'hrsh7th/cmp-path'},
 
  -- We'll be using mini.snippets
  {'nvim-mini/mini.nvim'},
+}
 
-
-f vim.fn.has('nvim-0.11') == 0 then
+if vim.fn.has('nvim-0.11') == 0 then
   vim.list_extend(Plugin.dependencies, {
     {
       'hrsh7th/cmp-nvim-lsp',
