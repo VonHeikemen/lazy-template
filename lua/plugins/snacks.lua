@@ -50,6 +50,11 @@ function Plugin.config(_, opts)
   -- Disable indent guide animation
   vim.g.snacks_animate = false
 
+  -- "fix" explorer watcher error on old neovim versions
+  if vim.uv == nil then
+    vim.uv = vim.loop
+  end
+
   local Snacks = require('snacks')
   Snacks.setup(opts)
 
