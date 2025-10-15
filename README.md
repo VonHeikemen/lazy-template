@@ -159,7 +159,7 @@ Leader key: `Space`.
 | [tokyonight.nvim](https://github.com/folke/tokyonight.nvim)                                     | Collection of colorscheme for Neovim.                                 |
 | [snacks.nvim](https://github.com/folke/snacks.nvim)                                             | Collection of QoL plugins.                                            |
 | [bufferline.nvim](https://github.com/akinsho/bufferline.nvim)                                   | Pretty tabline.                                                       |
-| [mini.nvim](https://github.com/nvim-mini/mini.nvim)                                           | Collection of independent lua modules that enhance Neovim's features. |
+| [mini.nvim](https://github.com/nvim-mini/mini.nvim)                                             | Collection of independent lua modules that enhance Neovim's features. |
 | [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)                                     | Shows indicators in gutter based on file changes detected by git.     |
 | [vim-fugitive](https://github.com/tpope/vim-fugitive)                                           | Git integration into Neovim/Vim.                                      |
 | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)                           | Configures treesitter parsers. Provides modules to manipulate code.   |
