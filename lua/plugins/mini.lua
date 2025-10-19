@@ -42,9 +42,7 @@ function Plugin.config()
   require('mini.icons').setup({style = 'glyph'})
 
   -- See :help MiniStatusline.config
-  require('mini.statusline').setup({
-    content = {active = user.statusline}
-  })
+  require('mini.statusline').setup({})
 
   -- See :help MiniComment.config
   require('mini.comment').setup({
@@ -63,7 +61,20 @@ function Plugin.config()
     },
   })
 
-  vim.notify = require('mini.notify').make_notify()
+  -- See :help MiniGit.config
+  require('mini.git').setup({})
+
+  -- See :help MiniDiff.config
+  require('mini.diff').setup({
+    view = {
+      style = 'sign',
+      signs = {
+        add = '▎',
+        change = '▎',
+        delete = '➤',
+      },
+    },
+  })
 
   -- See :help MiniSnippets.config
   local mini_snippets = require('mini.snippets')
@@ -113,28 +124,6 @@ function Plugin.config()
       {mode = 'n', keys = '<leader>f', desc = '+Find in files'},
       {mode = 'n', keys = '<leader>b', desc = '+Buffers'},
     }),
-  })
-end
-
--- See :help MiniStatusline-example-content
-function user.statusline()
-  local mini = require('mini.statusline')
-  local mode, mode_hl = mini.section_mode({trunc_width = 120})
-  local diagnostics = mini.section_diagnostics({trunc_width = 75})
-  local lsp = mini.section_lsp({icon = 'LSP', trunc_width = 75})
-  local filename = mini.section_filename({trunc_width = 140})
-  local percent = '%2p%%'
-  local location = '%3l:%-2c'
-
-  return mini.combine_groups({
-    {hl = mode_hl,                  strings = {mode}},
-    {hl = 'MiniStatuslineDevinfo',  strings = {diagnostics, lsp}},
-    '%<', -- Mark general truncate point
-    {hl = 'MiniStatuslineFilename', strings = {filename}},
-    '%=', -- End left alignment
-    {hl = 'MiniStatuslineFilename', strings = {'%{&filetype}'}},
-    {hl = 'MiniStatuslineFileinfo', strings = {percent}},
-    {hl = mode_hl,                  strings = {location}},
   })
 end
 
