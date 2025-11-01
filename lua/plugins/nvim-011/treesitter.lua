@@ -11,34 +11,48 @@ function Plugin.config()
   -- NOTE: the list of supported parsers is the documentation:
   -- https://github.com/nvim-treesitter/nvim-treesitter/blob/main/SUPPORTED_LANGUAGES.md
   local parsers = {'lua', 'vim', 'vimdoc'}
-  local group = vim.api.nvim_create_augroup('treesitter_cmds', {clear = true})
 
   local ts = vim.treesitter
+  local installed = require('nvim-treesitter').get_installed()
+  local group = vim.api.nvim_create_augroup('treesitter_cmds', {clear = true})
+
   local filetypes = vim.iter(parsers)
     :map(ts.language.get_filetypes)
     :flatten()
     :fold({}, function(tbl, v)
-      tbl[v] = true
+      tbl[v] = vim.tbl_contains(installed, v)
       return tbl
     end)
 
-  require('nvim-treesitter').install(parsers)
+  local ts_enable = function(buffer, lang)
+    local ok, hl = pcall(ts.query.get, lang, 'highlights')
+    if ok and hl then
+      ts.start(buffer, lang)
+    end
+  end
 
   vim.api.nvim_create_autocmd('FileType', {
     group = group,
     desc = 'enable treesitter',
     callback = function(event)
       local ft = event.match
-      if filetypes[ft] == nil then
+      local available = filetypes[ft]
+      if available == nil then
         return
       end
 
       local lang = ts.language.get_lang(ft)
-      local ok, hl = pcall(ts.query.get, lang, 'highlights')
+      local buffer = event.buf
 
-      if ok and hl then
-        ts.start(event.buf, lang)
+      if available then
+        ts_enable(buffer, lang)
+        return
       end
+
+      require('nvim-treesitter').install(lang):await(function()
+        filetypes[ft] = true
+        ts_enable(buffer, lang)
+      end)
     end,
   })
 end
