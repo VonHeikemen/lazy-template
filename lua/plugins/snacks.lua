@@ -3,6 +3,12 @@ local Plugin = {'folke/snacks.nvim'}
 
 Plugin.lazy = false
 
+if vim.fn.has('nvim-0.10') == 0 then
+  -- Last version that supports Neovim v0.9
+  Plugin.tag = 'v2.27.0'
+  Plugin.pin = true
+end
+
 Plugin.opts = {
   indent = {
     enabled = true,
