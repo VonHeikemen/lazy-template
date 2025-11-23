@@ -7,19 +7,9 @@ Plugin.dependencies = {
   {'abeldekat/cmp-mini-snippets'},
   {'hrsh7th/cmp-path'},
 
- -- We'll be using mini.snippets
- {'nvim-mini/mini.nvim'},
+  -- We'll be using mini.snippets
+  {'nvim-mini/mini.nvim'},
 }
-
-if vim.fn.has('nvim-0.11') == 0 then
-  vim.list_extend(Plugin.dependencies, {
-    {
-      'hrsh7th/cmp-nvim-lsp',
-      pin = true,
-      commit = 'a8912b88ce488f411177fc8aed358b04dc246d7b'
-    },
-  })
-end
 
 Plugin.event = 'InsertEnter'
 
