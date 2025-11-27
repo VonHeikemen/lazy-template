@@ -13,22 +13,34 @@ function Plugin.config()
   local parsers = {'lua', 'vim', 'vimdoc'}
 
   local ts = vim.treesitter
-  local installed = require('nvim-treesitter').get_installed()
   local group = vim.api.nvim_create_augroup('treesitter_cmds', {clear = true})
 
   local filetypes = vim.iter(parsers)
     :map(ts.language.get_filetypes)
     :flatten()
     :fold({}, function(tbl, v)
-      tbl[v] = vim.tbl_contains(installed, v)
+      tbl[v] = 0
       return tbl
     end)
 
   local ts_enable = function(buffer, lang)
-    local ok, hl = pcall(ts.query.get, lang, 'highlights')
-    if ok and hl then
+    local ok_hl, hl = pcall(ts.query.get, lang, 'highlights')
+    if ok_hl and hl then
       ts.start(buffer, lang)
     end
+
+    ---- Uncomment this block to enable folds
+    -- local ok_fld, fld = pcall(ts.query.get, lang, 'folds')
+    -- if ok_fld and fld then
+    --   vim.wo.foldmethod = 'expr'
+    --   vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    -- end
+
+    ---- Uncomment this block to enable indents
+    -- local ok_idt, idt = pcall(ts.query.get, lang, 'indents')
+    -- if ok_idt and idt then
+    --   vim.bo[buffer].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    -- end
   end
 
   vim.api.nvim_create_autocmd('FileType', {
@@ -44,13 +56,28 @@ function Plugin.config()
       local lang = ts.language.get_lang(ft)
       local buffer = event.buf
 
-      if available then
+      if lang == nil or lang == '' then
+        return
+      end
+
+      if available == 0 and ts.language.add(lang) then
+        available = 1
+        filetypes[ft] = 1
+      end
+
+      if available == 1 then
         ts_enable(buffer, lang)
         return
       end
 
       require('nvim-treesitter').install(lang):await(function()
-        filetypes[ft] = true
+        local parser_installed = ts.language.add(lang) == true
+        if not parser_installed then
+          filetypes[ft] = nil
+          return
+        end
+
+        filetypes[ft] = 1
         ts_enable(buffer, lang)
       end)
     end,
